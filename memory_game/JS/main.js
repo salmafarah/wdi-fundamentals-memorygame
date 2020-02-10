@@ -1,49 +1,73 @@
-var cards = [ 
+console.log("Up and running!");
+var cards = [
+   {
+       rank: "queen",
+       suit: "hearts",
+       cardImage: "images1/queen-of-hearts.png",
+   },
+   {
+      rank: "queen",
+      suit: "diamonds",
+      cardImage: "images1/queen-of-diamonds.png",
+   },
 
-{
-	rank : "queen",
-	suit : 'hearts',
-	cardImage : "images/queen-of-hearts.png",
-},
-{
-	rank : "queen",
-	suit: 'diamonds',
-	cardImage:"images/queen-of-diamonds.png",
-},
-{
-	rank : "king",
-	suit : "hearts",
-	cardImage : "images/king-of-hearts.png",
+   {
+    rank: "king",
+    suit: "hearts",
+    cardImage: "images1/king-of-hearts.png",
+   },
+    {
+    rank: "king",
+    suit: "diamonds",
+    cardImage: "images1/king-of-diamonds.png",
+   },
+];
 
-},
-{
-	rank : "king",
-	suit : "hearts",
-	cardImage : "images/king-of-diamonds.png",
-},
+var cardsInPlay = [];
 
-]; 
+ function checkForMatch() {
+  //if (cardsInPlay.length == 2) {
+    if (cardsInPlay[0] === cardsInPlay[1]) {
+          alert("You found a match!");
+          //setTimeout('location', 50000);
+        //location.reload()
 
-var cardsInPlay = []
-var cardId = [0,1,2,3,4]; 
-cardsInPlay.push(cards[cardId].rank); 
+      } else {
+          alert("Sorry, try again");
+        };
 
-function checkForMatch(cardsInplay){
-	if (cardsInPlay[0] === cardsInplay[1]) {
-		console.log('You found a match!');
-	} else {
-		console.log('Sorry, try again.');
-	}
-}
-
-function flipCard(cardId){
-console.log (' User flipped ' + cards[cardId].rank)  
-
-}
-flipCard(0);
-flipCard(2);
+  };
 
 
+function flipCard() {
+    var cardId = this.getAttribute('data-id');
+ //console.log("User flipped" + cards[cardId].rank);
+  cardsInPlay.push(cards[cardId].rank);
+ this.setAttribute('src', cards[cardId].cardImage);
+//console.log(cards[cardId].suit);
+ if (cardsInPlay.length === 2){
+    checkForMatch();
+    //cardsInPlay = [];
+
+ };
+};
+
+console.log(cardsInPlay);
+
+
+ function createBoard() {
+  const cardTable = document.getElementById('game-board');
+  for (var i = 0; i < cards.length; i++) {
+  var cardElement = document.createElement('img');
+    cardElement.setAttribute('src', 'images1/back.png');
+    cardElement.setAttribute('data-id', i);
+    cardElement.addEventListener('click', flipCard);
+    cardTable.appendChild(cardElement);
+
+  }
+};
+
+createBoard(); 
 
 
 
@@ -51,17 +75,6 @@ flipCard(2);
 
 
 
-
-
-
-if (cardsInPlay.length === 2) { 
-console.log (cardsInPlay.length);} 
-else {
-	console.log ( cardsInPlay[0] === cardsInPlay[2] );
-}
-
-
-alert ( 'You found a match!'); 
 
 
 
